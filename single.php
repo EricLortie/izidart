@@ -1,4 +1,4 @@
-<?php get_header(); ?>
+git status<?php get_header(); ?>
 <div class="b_content clearfix row" id="main">
 
     <?php
@@ -54,9 +54,6 @@
                                         ?>
                                                     <div class="love">
                                                       <div <?php  if( like::can_vote( $post -> ID ) ){  echo "onclick=\"javascript:act.like(".$post -> ID.", '#like-".$post -> ID."' , '');\""; } ?> class="set-like voteaction <?php if( like::is_voted( $post -> ID ) ){ echo 'voted '; } if( !like::can_vote( $post -> ID ) ){ echo "simplemodal-login"; }?>" id="voteaction"><em><strong  id="like-<?php echo $post -> ID; ?>"  ><?php  echo count( meta::get_meta( $post ->ID , 'like') ); ?></strong></em></div>
-                                                    </div>
-                                                    <div class="love btn-izidart">
-                                                      <div <?php  if( art::can_vote( $post -> ID ) ){  echo "onclick=\"javascript:act.art(".$post -> ID.", '#art-".$post -> ID."' , '');\""; } ?> class="set-art voteaction <?php if( art::is_voted( $post -> ID ) ){ echo 'IZART '; } if( !art::can_vote( $post -> ID ) ){ echo "simplemodal-login"; }?>" id="voteaction"><em><strong  id="like-<?php echo $post -> ID; ?>"  ><?php  echo count( meta::get_meta( $post ->ID , 'izart') ); ?></strong></em></div>
                                                     </div>
                                         <?php
                                                 }
@@ -408,11 +405,6 @@
                                         ?>
                                     </footer>
 
-                                    <?php
-                                      echo "lalalal";
-                                      echo print_r(exif_read_data(get_attached_file(get_post_thumbnail_id( $post -> ID )), 0, true));
-                                      echo "helloo";
-                                     ?>
                                 </article>
                                 <p class="delimiter blank">&nbsp;</p>
                                 <?php
