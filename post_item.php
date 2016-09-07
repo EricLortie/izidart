@@ -186,22 +186,38 @@ if(is_user_logged_in()){
                                 <input type="text" id="acf-field-longitude" class="text" name="fields[field_57d05d04c3e4d]" value="" placeholder="">
                           </label>
                         </div>
-                        <div id="location_display"></div>
                         <script>
+                          jQuery(window).ready(function(){
+                              initiate_geolocation();
+                          });
 
-                          var x = document.getElementById("location_display");
-                          function getLocation() {
-                              if (navigator.geolocation) {
-                                  navigator.geolocation.getCurrentPosition(showPosition);
-                              } else {
-                                  x.innerHTML = "Geolocation is not supported by this browser.";
+                          function initiate_geolocation() {
+                              navigator.geolocation.getCurrentPosition(handle_geolocation_query,handle_errors);
+                          }
+
+                          function handle_errors(error)
+                          {
+                              switch(error.code)
+                              {
+                                  case error.PERMISSION_DENIED: alert("user did not share geolocation data");
+                                  break;
+
+                                  case error.POSITION_UNAVAILABLE: alert("could not detect current position");
+                                  break;
+
+                                  case error.TIMEOUT: alert("retrieving position timed out");
+                                  break;
+
+                                  default: alert("unknown error");
+                                  break;
                               }
                           }
-                          function showPosition(position) {
-                              x.innerHTML = "Latitude: " + position.coords.latitude +
-                              "<br>Longitude: " + position.coords.longitude;
+
+                          function handle_geolocation_query(position){
+                              alert('Lat: ' + position.coords.latitude +
+                                    ' Lon: ' + position.coords.longitude);
                           }
-                        </script>
+                      </script>
 
 
                         <div class="field large-12 small-12 columns">
