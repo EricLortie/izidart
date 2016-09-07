@@ -1,4 +1,4 @@
-git status<?php get_header(); ?>
+<?php get_header(); ?>
 <div class="b_content clearfix row" id="main">
 
     <?php
