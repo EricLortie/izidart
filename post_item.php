@@ -156,26 +156,52 @@ if(is_user_logged_in()){
                             <input type="hidden" value="<?php echo $post_id; ?>"  name="post_id">
                         <?php } ?>
 
-                        <label>
-                            <h4>Address</h4>
-                            <input type="text" id="acf-field-street_address" class="text" name="fields[field_57d04ff871d2b]" value="" placeholder="" />
-                        </label>
-                        <label>
-                            <h4>City</h4>
-                              <input type="text" id="acf-field-city" class="text" name="fields[field_57d0500571d2c]" value="" placeholder="">
-                        </label>
-                        <label>
-                            <h4>Region (Province / State)</h4>
-                              <input type="text" id="acf-field-province_state" class="text" name="fields[field_57d0500e71d2d]" value="" placeholder="">
-                        </label>
-                        <label>
-                            <h4>Postal Code / Zip Code</h4>
-                              <input type="text" id="acf-field-postal_code" class="text" name="fields[field_57d0502871d2e]" value="" placeholder="">
-                        </label>
-                        <label>
-                            <h4>Country</h4>
-                              <input type="text" id="acf-field-postal_code" class="text" name="fields[field_57d0502871d2e]" value="" placeholder="">
-                        </label>
+                        <div class="field large-12 small-12 columns">
+                          <label>
+                              <h4>Address</h4>
+                              <input type="text" id="acf-field-street_address" class="text" name="fields[field_57d04ff871d2b]" value="" placeholder="" />
+                          </label>
+                          <label>
+                              <h4>City</h4>
+                                <input type="text" id="acf-field-city" class="text" name="fields[field_57d0500571d2c]" value="" placeholder="">
+                          </label>
+                          <label>
+                              <h4>Region (Province / State)</h4>
+                                <input type="text" id="acf-field-province_state" class="text" name="fields[field_57d0500e71d2d]" value="" placeholder="">
+                          </label>
+                          <label>
+                              <h4>Postal Code / Zip Code</h4>
+                                <input type="text" id="acf-field-postal_code" class="text" name="fields[field_57d0502871d2e]" value="" placeholder="">
+                          </label>
+                          <label>
+                              <h4>Country</h4>
+                                <input type="text" id="acf-field-postal_code" class="text" name="fields[field_57d0502871d2e]" value="" placeholder="">
+                          </label>
+                          <label>
+                              <h4>Latitude</h4>
+                                <input type="text" id="acf-field-latitude" class="text" name="fields[field_57d05cfec3e4c]" value="" placeholder="">
+                          </label>
+                          <label>
+                              <h4>Longitude</h4>
+                                <input type="text" id="acf-field-longitude" class="text" name="fields[field_57d05d04c3e4d]" value="" placeholder="">
+                          </label>
+                        </div>
+                        <div id="location_display"></div>
+                        <script>
+
+                          var x = document.getElementById("location_display");
+                          function getLocation() {
+                              if (navigator.geolocation) {
+                                  navigator.geolocation.getCurrentPosition(showPosition);
+                              } else {
+                                  x.innerHTML = "Geolocation is not supported by this browser.";
+                              }
+                          }
+                          function showPosition(position) {
+                              x.innerHTML = "Latitude: " + position.coords.latitude +
+                              "<br>Longitude: " + position.coords.longitude;
+                          }
+                        </script>
 
 
                         <div class="field large-12 small-12 columns">
