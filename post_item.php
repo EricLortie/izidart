@@ -159,32 +159,19 @@ if(is_user_logged_in()){
                         <div class="field large-12 small-12 columns">
                           <label>
                               <h4>Address</h4>
-                              <input type="text" id="acf-field-street_address" class="text" name="fields[field_57d04ff871d2b]" value="" placeholder="" />
+                              <input type="text" id="acf-field-address" class="text" name="fields[field_57d094c9c4397]" value="" placeholder="" />
                           </label>
-                          <label>
-                              <h4>City</h4>
-                                <input type="text" id="acf-field-city" class="text" name="fields[field_57d0500571d2c]" value="" placeholder="">
-                          </label>
-                          <label>
-                              <h4>Region (Province / State)</h4>
-                                <input type="text" id="acf-field-province_state" class="text" name="fields[field_57d0500e71d2d]" value="" placeholder="">
-                          </label>
-                          <label>
-                              <h4>Postal Code / Zip Code</h4>
-                                <input type="text" id="acf-field-postal_code" class="text" name="fields[field_57d0502871d2e]" value="" placeholder="">
-                          </label>
-                          <label>
-                              <h4>Country</h4>
-                                <input type="text" id="acf-field-postal_code" class="text" name="fields[field_57d0502871d2e]" value="" placeholder="">
-                          </label>
-                          <label>
-                              <h4>Latitude</h4>
-                                <input type="text" id="acf-field-latitude" class="text" name="fields[field_57d05cfec3e4c]" value="" placeholder="">
-                          </label>
-                          <label>
-                              <h4>Longitude</h4>
-                                <input type="text" id="acf-field-longitude" class="text" name="fields[field_57d05d04c3e4d]" value="" placeholder="">
-                          </label>
+                          <p>- OR - </p>
+                          <div id="gmw-cl-get-location">
+                            <a href="#" id="gmw-cl-trigger">Get your current location</a>
+                          </div>
+                          <div id="gmw-cl-respond-wrapper" style="display:none;">
+                            <div id="gmw-cl-spinner">
+                              <img src="http://52.205.52.173/wp-content/plugins/geo-my-wp/assets/images/gmw-loader.gif"></div>
+                              <div id="gmw-cl-message"></div>
+                              <div id="gmw-cl-map" style="width:100%;height:100px;display:none;">
+                            </div>
+                          </div>
                         </div>
                         <script>
                           jQuery(window).ready(function(){

@@ -168,3 +168,38 @@ function deb( $code = '' ){
         echo '----------------------------------END OF CODE-----------------------' . PHP_EOL;
     echo '</pre>';
 }
+
+//rename your custom function as you wish ( or leave it as is ).
+function add_front_end_geodata_to_posts(  $post_id ) {
+
+    //verify that even is being updated
+	if ( empty( $_POST['action'] ) || $_POST['action'] != 'event_save' )
+		return;
+
+    //Pass the submitted address field into an array
+    //There is no need to change this this fields for Event manager plugin
+	$address_fields = array(
+			'street'   => $_POST['location_address'],
+			'city'     => $_POST['location_town'],
+			'state'    => $_POST['location_state'],
+			'zipcode'  => $_POST['location_postcode'],
+			'country'  => $_POST['location_country']
+	);
+
+	//include the geocoder file
+	include_once( GMW_PT_PATH .'/includes/gmw-pt-update-location.php' );
+
+        //make sure the file included and the function needed exists
+	if ( function_exists( 'gmw_pt_update_location' ) ) {
+
+        //Create the array that will pass to the function
+		$args = array(
+				'post_id' => $post_id, //Post Id of the post
+				'address' => $address_fields // the address field array created above
+		);
+		//run the geocoder function
+		gmw_pt_update_location( $args );
+	}
+}
+//execute the function whenever post type is being updated
+add_action( 'save_post_event', 'add_front_end_geodata_to_posts' );
