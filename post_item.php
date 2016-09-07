@@ -155,54 +155,28 @@ if(is_user_logged_in()){
                         <?php if(isset($post_id)) { ?>
                             <input type="hidden" value="<?php echo $post_id; ?>"  name="post_id">
                         <?php } ?>
-                        <div id="acf_23" class="postbox  acf_postbox no_box">
-                          <button type="button" class="handlediv button-link" aria-expanded="true"><span class="screen-reader-text">Toggle panel: Art Fields</span><span class="toggle-indicator" aria-hidden="true"></span></button><h2 class="hndle ui-sortable-handle"><span>Art Fields</span></h2>
-                          <div class="inside">
-                            <div id="acf-street_address" class="field field_type-text field_key-field_57d04ff871d2b" data-field_name="street_address" data-field_key="field_57d04ff871d2b" data-field_type="text">
-                              <p class="label">
-                                <label for="acf-field-street_address">Street Address</label>
-                              </p>
-                              <div class="acf-input-wrap">
-                                <input type="text" id="acf-field-street_address" class="text" name="fields[field_57d04ff871d2b]" value="" placeholder="">
-                              </div>
-                            </div>
-                            <div id="acf-city" class="field field_type-text field_key-field_57d0500571d2c" data-field_name="city" data-field_key="field_57d0500571d2c" data-field_type="text">
-                              <p class="label">
-                                <label for="acf-field-city">City</label>
-                              </p>
-                              <div class="acf-input-wrap">
-                                <input type="text" id="acf-field-city" class="text" name="fields[field_57d0500571d2c]" value="" placeholder="">
-                              </div>
-                            </div>
-                            <div id="acf-province_state" class="field field_type-text field_key-field_57d0500e71d2d" data-field_name="province_state" data-field_key="field_57d0500e71d2d" data-field_type="text">
-                              <p class="label">
-                                <label for="acf-field-province_state">Province/State</label>
-                              </p>
-                              <div class="acf-input-wrap">
-                                <input type="text" id="acf-field-province_state" class="text" name="fields[field_57d0500e71d2d]" value="" placeholder="">
-                              </div>
-                            </div>
-                            <div id="acf-postal_code" class="field field_type-text field_key-field_57d0502871d2e" data-field_name="postal_code" data-field_key="field_57d0502871d2e" data-field_type="text">
-                              <p class="label">
-                                <label for="acf-field-postal_code">Postal Code</label>
-                              </p>
-                              <div class="acf-input-wrap">
-                                <input type="text" id="acf-field-postal_code" class="text" name="fields[field_57d0502871d2e]" value="" placeholder="">
-                              </div>
-                            </div>
-                            <div style="display:none">
-                              <input type="hidden" name="acf_nonce" value="a03d323086">
-                              <script type="text/javascript">
-                                (function($) {
 
-                                	$('#acf_23').addClass('acf_postbox no_box').removeClass('hide-if-js');
-                                	$('#adv-settings label[for="acf_23-hide"]').addClass('acf_postbox-toggle');
+                        <label>
+                            <h4>Address</h4>
+                            <input type="text" id="acf-field-street_address" class="text" name="fields[field_57d04ff871d2b]" value="" placeholder="" />
+                        </label>
+                        <label>
+                            <h4>City</h4>
+                              <input type="text" id="acf-field-city" class="text" name="fields[field_57d0500571d2c]" value="" placeholder="">
+                        </label>
+                        <label>
+                            <h4>Region (Province / State)</h4>
+                              <input type="text" id="acf-field-province_state" class="text" name="fields[field_57d0500e71d2d]" value="" placeholder="">
+                        </label>
+                        <label>
+                            <h4>Postal Code / Zip Code</h4>
+                              <input type="text" id="acf-field-postal_code" class="text" name="fields[field_57d0502871d2e]" value="" placeholder="">
+                        </label>
+                        <label>
+                            <h4>Country</h4>
+                              <input type="text" id="acf-field-postal_code" class="text" name="fields[field_57d0502871d2e]" value="" placeholder="">
+                        </label>
 
-                                })(jQuery);
-                              </script>
-                            </div>
-                          </div>
-                        </div>
 
                         <div class="field large-12 small-12 columns">
                             <p class="button blue">
