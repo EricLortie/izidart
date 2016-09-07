@@ -1,25 +1,25 @@
 <?php
-    class like{
+    class art{
         static function anti_loop(){
             $id = md5( md5( $_SERVER['HTTP_USER_AGENT'] ) );
 
             $time = time();
 
-            $user = get_option('set_user_like');
+            $user = get_option('set_user_art');
 
             if( is_array( $user ) && array_key_exists( $id , $user ) ){
                 if( (int) $user[ $id ] + 1  < (int) $time  ){
                     $user[ $id ]  = (int) $time;
-                    update_option( 'set_user_like' , $user );
+                    update_option( 'set_user_art' , $user );
                     return false;
                 }else{
                     $user[ $id ]  = (int) $time;
-                    update_option( 'set_user_like' , $user );
+                    update_option( 'set_user_art' , $user );
                     return true;
                 }
             }else{
                 $user[ $id ]  = (int) $time;
-                update_option( 'set_user_like' , $user );
+                update_option( 'set_user_art' , $user );
                 return true;
             }
         }
@@ -33,10 +33,10 @@
             }
 
 
-            $likes = meta::get_meta( $post_id , 'like' );
+            $arts = meta::get_meta( $post_id , 'art' );
 
             if( self::anti_loop() ){
-                echo (int)count( $likes );
+                echo (int)count( $arts );
                 exit;
             }
 
@@ -52,23 +52,23 @@
             }
 
             if( $user_id > 0 ){
-                /* like by user */
-                foreach( $likes as  $like ){
-                    if( isset( $like['user_id'] ) && $like['user_id'] == $user_id ){
+                /* art by user */
+                foreach( $arts as  $art ){
+                    if( isset( $art['user_id'] ) && $art['user_id'] == $user_id ){
                        $user   = false;
                        $user_ip = false;
                     }
                 }
             }else{
-                if( options::logic( 'general' , 'like_register' ) ){
+                if( options::logic( 'general' , 'art_register' ) ){
                     if( $ajax ){
                         exit;
                     }else{
                         return '';
                     }
                 }
-                foreach( $likes as  $like ){
-                    if( isset( $like['ip'] ) && ( $like['ip'] == $ip ) ){
+                foreach( $arts as  $art ){
+                    if( isset( $art['ip'] ) && ( $art['ip'] == $ip ) ){
                         $user = false;
                         $user_ip = false;
                     }
@@ -76,52 +76,52 @@
             }
 
             if( $user && $user_ip ){
-                /* add like */
-                $likes[] = array( 'user_id' => $user_id , 'ip' => $ip );
-                meta::set_meta( $post_id , 'nr_like' , count( $likes ) );
-                meta::set_meta( $post_id , 'like' ,  $likes );
+                /* add art */
+                $arts[] = array( 'user_id' => $user_id , 'ip' => $ip );
+                meta::set_meta( $post_id , 'nr_art' , count( $arts ) );
+                meta::set_meta( $post_id , 'art' ,  $arts );
                 $date = meta::get_meta( $post_id , 'hot_date' );
                 if( empty( $date ) ){
-                    if( ( count( $likes ) >= (int)options::get_value( 'general' , 'min_likes' ) ) ){
+                    if( ( count( $arts ) >= (int)options::get_value( 'general' , 'min_arts' ) ) ){
                         meta::set_meta( $post_id , 'hot_date' , mktime() );
                     }
                 }else{
-                    if( ( count( $likes ) < (int)options::get_value( 'general' , 'min_likes' ) ) ){
+                    if( ( count( $arts ) < (int)options::get_value( 'general' , 'min_arts' ) ) ){
                         delete_post_meta( $post_id, 'hot_date' );
                     }
                 }
             }else{
-                /* delete like */
+                /* delete art */
                 if( $user_id > 0 ){
-                    foreach( $likes as $index => $like ){
-                        if( isset( $like['user_id'] ) && $like['user_id'] == $user_id ){
-                            unset( $likes[ $index ] );
+                    foreach( $arts as $index => $art ){
+                        if( isset( $art['user_id'] ) && $art['user_id'] == $user_id ){
+                            unset( $arts[ $index ] );
                         }
                     }
                 }else{
-                    if( options::logic( 'general' , 'like_register' ) ){
+                    if( options::logic( 'general' , 'art_register' ) ){
                         if( $ajax ){
                             exit;
                         }else{
                             return '';
                         }
                     }
-                    foreach( $likes as $index => $like ){
-                        if( isset( $like['ip'] ) && isset( $like['user_id'] ) && ( $like['ip'] == $ip ) && ( $like['user_id'] == 0 ) ){
-                            unset( $likes[ $index ] );
+                    foreach( $arts as $index => $art ){
+                        if( isset( $art['ip'] ) && isset( $art['user_id'] ) && ( $art['ip'] == $ip ) && ( $art['user_id'] == 0 ) ){
+                            unset( $arts[ $index ] );
                         }
                     }
                 }
 
-                meta::set_meta( $post_id , 'like' ,  $likes );
-                meta::set_meta( $post_id , 'nr_like' ,  count( $likes ) );
-                if( count( $likes ) < (int)options::get_value( 'general' , 'min_likes' ) ){
+                meta::set_meta( $post_id , 'art' ,  $arts );
+                meta::set_meta( $post_id , 'nr_art' ,  count( $arts ) );
+                if( count( $arts ) < (int)options::get_value( 'general' , 'min_arts' ) ){
                     delete_post_meta($post_id, 'hot_date' );
                 }
             }
 
             if( $ajax ){
-                echo (int)count( $likes );
+                echo (int)count( $arts );
                 exit;
             }
         }
@@ -129,7 +129,7 @@
         static function is_voted( $post_id ){
             $ip     = $_SERVER['REMOTE_ADDR'];
 
-            $likes = meta::get_meta( $post_id , 'like' );
+            $arts = meta::get_meta( $post_id , 'art' );
 
             if( is_user_logged_in () ){
                 $user_id = get_current_user_id();
@@ -138,14 +138,14 @@
             }
 
             if( $user_id > 0 ){
-                foreach( $likes as $like ){
-                    if( isset( $like['user_id'] ) && $like['user_id'] == $user_id ){
+                foreach( $arts as $art ){
+                    if( isset( $art['user_id'] ) && $art['user_id'] == $user_id ){
                         return true;
                     }
                 }
             }else{
-                foreach( $likes as $like ){
-                    if( isset( $like['ip'] ) && $like['ip'] == $ip ){
+                foreach( $arts as $art ){
+                    if( isset( $art['ip'] ) && $art['ip'] == $ip ){
                         return true;
                     }
                 }
@@ -157,7 +157,7 @@
         static function can_vote( $post_id ){
             $ip     = $_SERVER['REMOTE_ADDR'];
 
-            $likes = meta::get_meta( $post_id , 'like' );
+            $arts = meta::get_meta( $post_id , 'art' );
 
             if( is_user_logged_in () ){
                 $user_id = get_current_user_id();
@@ -165,13 +165,13 @@
                 $user_id = 0;
             }
 
-            if( options::logic( 'general' , 'like_register' ) && $user_id == 0 ){
+            if( options::logic( 'general' , 'art_register' ) && $user_id == 0 ){
                 return false;
             }
 
             if( $user_id == 0 ){
-                foreach( $likes as $like ){
-                    if( isset( $like['user_id'] ) && $like['user_id'] > 0  && $like['ip'] == $ip ){
+                foreach( $arts as $art ){
+                    if( isset( $art['user_id'] ) && $art['user_id'] > 0  && $art['ip'] == $ip ){
                         return false;
                     }
                 }
@@ -180,14 +180,14 @@
             return true;
         }
 
-		static function reset_likes(){
+		static function reset_arts(){
             global $wp_query;
             $paged      = isset( $_POST['page']) ? $_POST['page'] : exit;
             $wp_query = new WP_Query( array('posts_per_page' => 150 , 'post_type' => 'post' , 'paged' => $paged ) );
 
             foreach( $wp_query -> posts as $post ){
-                delete_post_meta($post -> ID, 'nr_like' );
-				delete_post_meta($post -> ID, 'like' );
+                delete_post_meta($post -> ID, 'nr_art' );
+				delete_post_meta($post -> ID, 'art' );
 				delete_post_meta($post -> ID, 'hot_date' );
             }
 
@@ -202,28 +202,28 @@
             exit();
         }
 
-		static function sim_likes(){
+		static function sim_arts(){
             global $wp_query;
             $paged      = isset( $_POST['page']) ? $_POST['page'] : exit;
             $wp_query = new WP_Query( array('posts_per_page' => 150 , 'post_type' => 'post' , 'paged' => $paged ) );
 
 
             foreach( $wp_query -> posts as $post ){
-                $likes = array();
+                $arts = array();
                 $ips = array();
                 $nr = rand( 60 , 200 );
-                while( count( $likes ) < $nr ){
+                while( count( $arts ) < $nr ){
                     $ip = rand( -255 , -100 ) .  rand( -255 , -100 )  . rand( -255 , -100 ) . rand( -255 , -100 );
 
                     $ips[ $ip ] = $ip;
 
-                    if( count( $ips )  > count( $likes ) ){
-                        $likes[] = array( 'user_id' => 0 , 'ip' => $ip );
+                    if( count( $ips )  > count( $arts ) ){
+                        $arts[] = array( 'user_id' => 0 , 'ip' => $ip );
                     }
                 }
 
-                meta::set_meta( $post -> ID , 'nr_like' , count( $likes ) );
-                meta::set_meta( $post -> ID , 'like' ,  $likes );
+                meta::set_meta( $post -> ID , 'nr_art' , count( $arts ) );
+                meta::set_meta( $post -> ID , 'art' ,  $arts );
                 meta::set_meta( $post -> ID , 'hot_date' , mktime() );
             }
 
@@ -238,16 +238,16 @@
             exit();
         }
 
-        static function min_likes(){
+        static function min_arts(){
             global $wp_query;
             $new_limit  = isset( $_POST['new_limit']) ? $_POST['new_limit'] : exit;
             $paged      = isset( $_POST['page']) ? $_POST['page'] : exit;
 
             $wp_query = new WP_Query( array('posts_per_page' => 150 , 'post_type' => 'post' , 'paged' => $paged ) );
             foreach( $wp_query -> posts as $post ){
-                $likes = meta::get_meta( $post -> ID , 'like' );
-                meta::set_meta( $post -> ID , 'nr_like' , count( $likes ) );
-                if( count( $likes ) < (int)$new_limit ){
+                $arts = meta::get_meta( $post -> ID , 'art' );
+                meta::set_meta( $post -> ID , 'nr_art' , count( $arts ) );
+                if( count( $arts ) < (int)$new_limit ){
                     delete_post_meta( $post -> ID, 'hot_date' );
                 }else{
                     if( (int)meta::get_meta( $post -> ID , 'hot_date' ) > 0 ){
@@ -260,7 +260,7 @@
             if( $wp_query -> max_num_pages >= $paged ){
                 if( $wp_query -> max_num_pages == $paged ){
                     $general = options::get_value( 'general' );
-                    $general['min_likes'] = $new_limit;
+                    $general['min_arts'] = $new_limit;
                     update_option( 'general' , $general );
                     echo 0;
                 }else{

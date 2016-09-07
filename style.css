@@ -1,5 +1,5 @@
 /*
-    Theme Name: Me Gusta!
+    Theme Name: IZIDART
     Theme URI: http://cosmothemes.com/megusta
     Description: Our themes are using the zurb.foundation grid system while the mark-up is powered by a strong css framework. Me Gusta 2! Theme has been tested in all modern browsers - IE 7 , IE 8, IE 9 , Opera, Firefox, Safari and Chrome. Key features of the template - infinit Color Schemes, Background Styling Options, Custom Text-based Logos, Social Media Links, Multiple Multi-Level jQuery Menus, Built-in Breadcrumbs, Custom Front Page Layout, Advertisement Sidebars, Custom Widget (Popular, Recent, Comments, Tags), Twitter Widget, Contact Form Widget, Flickr Widget, Custom Page Templates, Hide/Show Meta Elements for each particular post, Featured Image, Built-in Social Sharing, About the author box, Built-in Related Posts, Nested Comments, 100+ Shortcodes, Unlimited sidebars, Language support.
     Version: 3.1
@@ -304,10 +304,12 @@ p.hint { margin: 30px 0; color: white; font-size: 15px;}
 .love em { display: block; position: relative; width: 48px; height: 42px; font-style: normal; }
 .love strong { position: relative; z-index: 999; color: white;}
 
+.love.btn-izidart { top: 44px !important;}
+
 .larger .fl .love, .larger .fullwidth .love {left: -107px; *left: -137px;}
-#voteaction.fixed { 
-    position: fixed; 
-    top: 45px; 
+#voteaction.fixed {
+    position: fixed;
+    top: 45px;
     left: initial;
     /*-webkit-transition: all .25s ease;
        -moz-transition: all .25s ease;
@@ -329,7 +331,7 @@ p.hint { margin: 30px 0; color: white; font-size: 15px;}
 /*Entry header*/
 .entry-header {float: left; width: 100%; clear: both; }
 .entry-content {float: left; width: 100%; clear: both; margin-bottom: 20px; }
-.entry-footer { 
+.entry-footer {
     float: left; width: 100%; clear: both;
     padding-left: 0.9375rem;
     padding-right: 0.9375rem;
@@ -406,13 +408,13 @@ span.first a{ display: none;}
 .share .share_button {position: relative; margin-right: 15px; top: -6px; display: inline-block;}
 
 /*Breadcrumbs*/
-.breadcrumbs { 
+.breadcrumbs {
     border-style: none;
-    padding:0px 0 30px 0; 
-    margin-top: -20px; 
-    margin-bottom: 30px; 
-    font-size: 11px; 
-    background: url(images/delimiter.bg.x.png) repeat-x left bottom ; 
+    padding:0px 0 30px 0;
+    margin-top: -20px;
+    margin-bottom: 30px;
+    font-size: 11px;
+    background: url(images/delimiter.bg.x.png) repeat-x left bottom ;
     clear: both; *float: none;
 }
 .breadcrumbs p{ float: left; line-height: 18px; margin: 0; }
@@ -491,8 +493,8 @@ h2.entry-title { line-height: 26px;}
 .grid-view .post, .box-related .post{clear: none;}
 
 /*Switch*/
-a.switch { 
-    display: inline-block; position: absolute; top: 4px; right: 0.9375rem; width: 49px;  height: 20px; overflow: hidden; background: url(images/display.png) no-repeat right -20px; cursor: pointer; 
+a.switch {
+    display: inline-block; position: absolute; top: 4px; right: 0.9375rem; width: 49px;  height: 20px; overflow: hidden; background: url(images/display.png) no-repeat right -20px; cursor: pointer;
 }
 a.switch.swap { background-position: right 0px; }
 
@@ -1381,7 +1383,7 @@ div.social_connect_ui{display: none;}
 }
 .hotkeys-meta .nav-previous, .hotkeys-meta .nav-next{
     display: none;
-} 
+}
 .cosmo_uploader_interface{
 	width: 100%;
 }
@@ -1452,40 +1454,3 @@ div.social_connect_ui{display: none;}
 select#cat ~ .chosen-container-multi .chosen-choices li.search-field input[type=text] {
     width: 100%!important; /*fix for category chosen select div*/
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

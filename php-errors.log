@@ -1,0 +1,22 @@
+[03-Sep-2016 23:18:41 UTC] PHP Fatal error:  Call to undefined function print_f() in /Users/eric/Sites/izidart/wp-content/themes/izidart/single.php on line 413
+[03-Sep-2016 23:19:05 UTC] PHP Warning:  exif_read_data(): Filename cannot be empty in /Users/eric/Sites/izidart/wp-content/themes/izidart/single.php on line 413
+[03-Sep-2016 23:19:05 UTC] PHP Warning:  exif_read_data(): Unable to open file in /Users/eric/Sites/izidart/wp-content/themes/izidart/single.php on line 413
+[03-Sep-2016 23:21:18 UTC] PHP Warning:  exif_read_data(): Filename cannot be empty in /Users/eric/Sites/izidart/wp-content/themes/izidart/single.php on line 413
+[03-Sep-2016 23:21:19 UTC] PHP Warning:  exif_read_data(): Unable to open file in /Users/eric/Sites/izidart/wp-content/themes/izidart/single.php on line 413
+[03-Sep-2016 23:23:28 UTC] PHP Fatal error:  Call to undefined function wp_get_attached_file() in /Users/eric/Sites/izidart/wp-content/themes/izidart/single.php on line 413
+[04-Sep-2016 23:36:24 UTC] PHP Warning:  An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href="https://wordpress.org/support/">support forums</a>. (WordPress could not establish a secure connection to WordPress.org. Please contact your server administrator.) in /Users/eric/Sites/izidart/wp-admin/includes/update.php on line 115
+[04-Sep-2016 23:37:22 UTC] PHP Warning:  Illegal string offset 'region' in /Users/eric/Sites/izidart/wp-content/plugins/mygeopositioncom-geotags-geometatags/mygeopositioncom-geotags-geometatags.php on line 386
+[04-Sep-2016 23:37:22 UTC] PHP Warning:  Illegal string offset 'placename' in /Users/eric/Sites/izidart/wp-content/plugins/mygeopositioncom-geotags-geometatags/mygeopositioncom-geotags-geometatags.php on line 390
+[04-Sep-2016 23:37:22 UTC] PHP Warning:  Illegal string offset 'position' in /Users/eric/Sites/izidart/wp-content/plugins/mygeopositioncom-geotags-geometatags/mygeopositioncom-geotags-geometatags.php on line 394
+[04-Sep-2016 23:37:22 UTC] PHP Warning:  Illegal string offset 'addMap' in /Users/eric/Sites/izidart/wp-content/plugins/mygeopositioncom-geotags-geometatags/mygeopositioncom-geotags-geometatags.php on line 639
+[04-Sep-2016 23:37:22 UTC] PHP Warning:  Illegal string offset 'position' in /Users/eric/Sites/izidart/wp-content/plugins/mygeopositioncom-geotags-geometatags/mygeopositioncom-geotags-geometatags.php on line 478
+[04-Sep-2016 23:37:22 UTC] PHP Warning:  Illegal string offset 'position' in /Users/eric/Sites/izidart/wp-content/plugins/mygeopositioncom-geotags-geometatags/mygeopositioncom-geotags-geometatags.php on line 561
+[04-Sep-2016 23:37:22 UTC] PHP Warning:  Illegal string offset 'position' in /Users/eric/Sites/izidart/wp-content/plugins/mygeopositioncom-geotags-geometatags/mygeopositioncom-geotags-geometatags.php on line 603
+[04-Sep-2016 23:40:55 UTC] PHP Warning:  Illegal string offset 'region' in /Users/eric/Sites/izidart/wp-content/plugins/mygeopositioncom-geotags-geometatags/mygeopositioncom-geotags-geometatags.php on line 386
+[04-Sep-2016 23:40:55 UTC] PHP Warning:  Illegal string offset 'placename' in /Users/eric/Sites/izidart/wp-content/plugins/mygeopositioncom-geotags-geometatags/mygeopositioncom-geotags-geometatags.php on line 390
+[04-Sep-2016 23:40:55 UTC] PHP Warning:  Illegal string offset 'position' in /Users/eric/Sites/izidart/wp-content/plugins/mygeopositioncom-geotags-geometatags/mygeopositioncom-geotags-geometatags.php on line 394
+[04-Sep-2016 23:40:55 UTC] PHP Warning:  Illegal string offset 'addMap' in /Users/eric/Sites/izidart/wp-content/plugins/mygeopositioncom-geotags-geometatags/mygeopositioncom-geotags-geometatags.php on line 639
+[04-Sep-2016 23:40:55 UTC] PHP Warning:  Illegal string offset 'position' in /Users/eric/Sites/izidart/wp-content/plugins/mygeopositioncom-geotags-geometatags/mygeopositioncom-geotags-geometatags.php on line 478
+[04-Sep-2016 23:40:55 UTC] PHP Warning:  Illegal string offset 'position' in /Users/eric/Sites/izidart/wp-content/plugins/mygeopositioncom-geotags-geometatags/mygeopositioncom-geotags-geometatags.php on line 561
+[04-Sep-2016 23:40:55 UTC] PHP Warning:  Illegal string offset 'position' in /Users/eric/Sites/izidart/wp-content/plugins/mygeopositioncom-geotags-geometatags/mygeopositioncom-geotags-geometatags.php on line 603
+[05-Sep-2016 00:04:54 UTC] PHP Warning:  Invalid argument supplied for foreach() in /Users/eric/Sites/izidart/wp-content/plugins/geo-my-wp/includes/geo-my-wp-widgets.php on line 78

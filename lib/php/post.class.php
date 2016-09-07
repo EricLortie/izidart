@@ -9,10 +9,10 @@
                 return false;
             }
         }
-        
+
         static function author( $author = '' ){
             global $wp_query;
-            
+
             echo '<div class="author-container">';
             if( isset( $_GET['type'] ) ){
                 switch( $_GET['type'] ){
@@ -40,10 +40,10 @@
             echo '<script type="text/javascript">';
             echo 'jQuery(document).ready(function(){ act.author( \'' . $type . '\' , ' . $author . ' , 0 , [] , 1 ); });';
             echo '</script>';
-            
+
             echo '</div>';
         }
-        
+
         static function author_type( ){
             $post_id = isset( $_POST['post_id'] ) ? $_POST['post_id'] : exit;
             $uid   = isset( $_POST['author'] ) ? $_POST['author'] : exit;
@@ -52,7 +52,7 @@
 			if(!is_array($result)){$result = array(); }
             $type  = isset( $_POST['type'] ) ? $_POST['type'] : 0;
             global $wp_query;
-           
+
             self::$post_id = $post_id;
             add_filter( 'posts_where', array( 'post' , 'filter_where' ) );
             if( $ptype == 'post' ){
@@ -115,7 +115,7 @@
                         }
                     }
                 }
-                    
+
                 if( count( $result ) == 12 ){
                     $break = true;
                     break;
@@ -139,7 +139,7 @@
                             echo '<p class="delimiter">&nbsp;</p>';
                             self::loop_switch( 'author' , 0 );
                         }
-                    }           
+                    }
                     if( $wp_query -> max_num_pages > 1 || $break ){
                         echo '<div class="clearfix get-more"><p class="button"><a id="get-more" index="' . $post_id . '" href="javascript:act.author( \'' . $ptype . '\' , '.$uid.' , jQuery(\'#get-more\').attr(\'index\') , [] , 0 );">'. __( 'get more' , 'cosmotheme' ) .'</a></p></div>';
                     }
@@ -155,10 +155,10 @@
 <?php
                 }
             }
-        
+
             exit();
         }
-        
+
         static function filter_where( $where = '' ) {
             global $wpdb;
             if( self::$post_id > 0 ){
@@ -166,7 +166,7 @@
             }
             return $where;
         }
-    
+
         static function random_posts( $no_ajax = false ){
             global $wp_query;
             if( (int) get_query_var( 'paged' ) > 0 ){
@@ -240,7 +240,7 @@
                             'type' => 'numeric',
                         ) ),
                 'order' => 'DESC' ));
-            
+
             self::loop( 'front_page' );
         }
 
@@ -316,7 +316,7 @@
 
                     <!-- meta -->
 
-                    <?php 
+                    <?php
                         if( options::logic( 'general' , 'meta' ) ){
                             self::meta( $post );
                         }
@@ -345,7 +345,7 @@
 							  {
 								$vimeo_id = post::get_vimeo_video_id( $format['feat_url'] );
 								$youtube_id = post::get_youtube_video_id( $format['feat_url'] );
-							
+
 								if( $vimeo_id != '0' ){
 								  $video_type = 'vimeo';
 								  $video_id = $vimeo_id;
@@ -362,12 +362,12 @@
 									$onclick = 'playVideo("'.urlencode(wp_get_attachment_url($video_id)).'","'.$video_type.'",jQuery(this))';
 								}else{
 									$onclick = 'playVideo("'.$video_id.'","'.$video_type.'",jQuery(this))';
-								}    
-							
+								}
+
 							}else{
 								$meta = meta::get_meta( $post -> ID  , 'settings' );
 								if( isset( $meta['safe'] ) ){
-									if( !meta::logic( $post , 'settings' , 'safe' ) ){		
+									if( !meta::logic( $post , 'settings' , 'safe' ) ){
 										$onclick = 'playVideo("'.$video_id.'","'.$video_type.'",jQuery(this))';
 									}
 								}else{
@@ -375,8 +375,8 @@
 										$onclick = 'playVideo("'.urlencode(wp_get_attachment_url($video_id)).'","'.$video_type.'",jQuery(this))';
 									}else{
 										$onclick = 'playVideo("'.$video_id.'","'.$video_type.'",jQuery(this))';
-									}    
-								}	
+									}
+								}
 							}
 						  }
 						}
@@ -438,14 +438,14 @@
                 <?php
                     }
                 ?>
-                
+
                 <footer class="entry-footer">
-					<?php /*$attached_file_meta = meta::get_meta( $post -> ID , 'format' ); 
+					<?php /*$attached_file_meta = meta::get_meta( $post -> ID , 'format' );
 						if( get_post_format( $post -> ID ) == 'link' ){
 							echo post::get_attached_file($post -> ID);
-						}  */ 
-					  
-					?>	
+						}  */
+
+					?>
                     <?php
                         if( strlen( $post -> post_excerpt . $post -> post_content ) > 0 ){
                     ?>
@@ -575,7 +575,7 @@
                     ?>
                 </h2>
 				<!-- meta -->
-   
+
 				<?php   if( options::logic( 'general' , 'meta' ) ){	 ?>
                 <div class="entry-meta">
                     <ul>
@@ -742,9 +742,9 @@
 
             return $grid;
         }
-        
+
         static function loop( $template ) {
-            global $wp_query;        
+            global $wp_query;
             echo '<input type="hidden" id="query-' . $template . '" value="' . urlencode( json_encode( $wp_query -> query ) ) . '" />';
             if ( count( $wp_query->posts) > 0 ) {
                 if( self::is_grid( $template ) ){
@@ -760,13 +760,13 @@
                     </div>
     <?php
                 }
-                
+
                 get_template_part('pagination');
             } else {
                 get_template_part('loop', '404');
             }
         }
-        
+
         static function loop_switch( $template = '' , $grid = 1 ) {
             global $wp_query;
             if ( !empty( $template ) ) {
@@ -839,17 +839,17 @@
         ?>
             <div class="entry-meta">
                 <ul>
-					<?php if(options::logic( 'upload' , 'enb_edit_delete' ) && is_user_logged_in() && $post->post_author == get_current_user_id() ){ 
+					<?php if(options::logic( 'upload' , 'enb_edit_delete' ) && is_user_logged_in() && $post->post_author == get_current_user_id() ){
 						$post_item_page = get_page_by_title('Post Item');
 						//get_page_link($post_item_page->ID);
-					?> 
-						<li class="edit_post" title="<?php _e('Edit post','cosmotheme') ?>"><a href="<?php  echo add_query_arg( 'post', $post->ID, get_page_link($post_item_page->ID) );   ?>"  ><?php echo _e('Edit','cosmotheme'); ?></a></li>    
+					?>
+						<li class="edit_post" title="<?php _e('Edit post','cosmotheme') ?>"><a href="<?php  echo add_query_arg( 'post', $post->ID, get_page_link($post_item_page->ID) );   ?>"  ><?php echo _e('Edit','cosmotheme'); ?></a></li>
 					<?php }   ?>
-					<?php if( options::logic( 'upload' , 'enb_edit_delete' )  && is_user_logged_in() && $post->post_author == get_current_user_id() ){  
+					<?php if( options::logic( 'upload' , 'enb_edit_delete' )  && is_user_logged_in() && $post->post_author == get_current_user_id() ){
 						$confirm_delete = __('Confirm to delete this post.','cosmotheme');
 					?>
 					<li class="delete_post" title="<?php _e('Remove post','cosmotheme') ?>"><a href="javascript:void(0)" onclick="if(confirm('<?php echo $confirm_delete; ?> ')){ removePost('<?php echo $post->ID; ?>','<?php echo home_url() ?>');}" ><?php echo _e('Delete','cosmotheme'); ?></a></li>
-					<?php  } ?>  
+					<?php  } ?>
                     <?php //edit_post_link( __( 'Edit', 'cosmotheme' ), '<li class="edit_post" title="' . __( 'Edit' , 'cosmotheme' ) . '">', '</li>' ); ?>
                     <li class="author" title="Author"><a href="<?php echo get_author_posts_url( $post-> post_author ) ?>"><?php echo mb_substr( get_the_author_meta( 'display_name' , $post-> post_author ) , 0 , _AUTL_ ); ?></a></li>
                     <li class="time">
@@ -968,46 +968,46 @@
             </div>
         <?php
         }
-        
+
         static function add_image_post(){
         	$response = array(  'image_error' => '',
-        						'error_msg' => '',	
+        						'error_msg' => '',
         						'title_error' => '',
         						'post_id' => 0,
         						'auth_error' => '',
         						'success_msg' => ''	);
-        	
-        	
+
+
         	$is_valid = true;
- 
+
         	if(!is_user_logged_in()){
-        		$is_valid = false;	
+        		$is_valid = false;
         		$response['error_msg'] = 'error';
-        		$response['auth_error'] = __('You must be logged in to submit a post! ','cosmotheme');	
+        		$response['auth_error'] = __('You must be logged in to submit a post! ','cosmotheme');
         	}
         	if(is_user_logged_in() && isset($_POST['post_id'])){
 				$post_edit = get_post($_POST['post_id']);
-				
+
 				if(get_current_user_id() != $post_edit->post_author){
-					$is_valid = false;	
+					$is_valid = false;
 					$response['error_msg'] = __('You are not the author of this post. ','cosmotheme');
 					$response['title_error'] = __('You are not the author of this post. ','cosmotheme');
 				}
 			}
         	if(!isset($_POST['title']) || trim($_POST['title']) == ''){
-        		$is_valid = false;	
+        		$is_valid = false;
         		$response['error_msg'] = 'Title is required. ';
         		$response['title_error'] = __('Title is required. ','cosmotheme');
         	}
-     
+
 			if(!isset($_POST['attachments']) || !is_array($_POST['attachments']) || !isset($_POST['featured']) || !is_numeric($_POST['featured']))
 			  {
-        		$is_valid = false;	
+        		$is_valid = false;
         		$response['error_msg'] = 'error';
         		$response['image_error'] = __('An image post must have a featured image. ','cosmotheme');
 			  }
-        	
-        	
+
+
         		if($is_valid){
 
                     $post_categories = array();
@@ -1016,25 +1016,25 @@
                             $post_categories[] = intval ( str_replace('category__', '', $key_var) );
                         }
                     }
-           
+
         			$post_content = '';
         			if(isset($_POST['image_content'])){
         				$post_content = $_POST['image_content'];
         			}
-        			
+
         			if(isset($_POST['post_id'])){
 						$new_post = self::create_new_post($_POST['title'], $_POST['tags'], $post_categories, $post_content, $_POST['post_id']);  /*add image as content*/
 					}else{
 						$new_post = self::create_new_post($_POST['title'],$_POST['tags'],$post_categories,$post_content);  /*add image as content*/
 					}
-        			
-				    
+
+
 				    if(is_numeric($new_post))
-					  {	
+					  {
 						$attachments = get_children( array('post_parent' => $new_post, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID') );
 						foreach ($attachments as $index => $id) {
 							$attachment = $index;
-						} 
+						}
 						foreach($_POST['attachments'] as $index=>$imageid)
 						  {
 							if($imageid==$_POST['featured'])
@@ -1046,24 +1046,24 @@
 							 $attachment_post->post_parent=$new_post;
 							 wp_update_post($attachment_post);
 						  }
-						
+
 						if(isset($_POST['nsfw'])){
 							$settings_meta = array(	  "safe"=>  "yes");
 							meta::set_meta( $new_post , 'settings' , $settings_meta );
 						}else{
 							$settings_meta = array(	  "safe"=>  "yes");
 							delete_post_meta($new_post, 'settings', $settings_meta );
-						}	
-						
+						}
+
 						/*add source meta data*/
 						if(isset($_POST['source']) && trim($_POST['source']) != ''){
 						  $settings_meta = array(	  "post_source"=>  $_POST['source']);
-						  meta::set_meta( $new_post , 'source' , $settings_meta );	
+						  meta::set_meta( $new_post , 'source' , $settings_meta );
 						}else{
 							$settings_meta = array(	  "post_source"=>  $_POST['source']);
 							delete_post_meta($new_post, 'source', $settings_meta );
-						}	
-							
+						}
+
 						/*add video url meta data*/
 						$image_format_meta = array("type" => 'image', 'images'=>$_POST['attachments']);
 						meta::set_meta( $new_post , 'format' , $image_format_meta );
@@ -1071,7 +1071,7 @@
 						if(isset($_POST['post_format']) && ($_POST['post_format'] == 'video' || $_POST['post_format'] == 'image' || $_POST['post_format'] == 'audio') ){
 							set_post_format( $new_post , $_POST['post_format']);
 						}
-						
+
 						if(isset($_POST['post_id'])){ /*if the post is edited */
 							$post_status = options::get_value( 'upload' , 'default_edit_status' );
 						}else{ /* if the post is just created */
@@ -1079,17 +1079,17 @@
 						}
 						if($post_status == 'publish'){
 							/*if post was publihed imediatelly then we will show the prmalink to the user*/
-								
+
 							$response['success_msg'] = sprintf(__('You can check your post %s here%s.','cosmotheme'),'<a href="'.get_permalink($new_post).'">','</a>');
-							
+
 						}else{
 							$response['success_msg'] = __('Success. Your post is awaiting moderation.','cosmotheme');
-						}	
+						}
 						$response['post_id'] = $new_post;
-				    }	
-				    
-	        		
-        		}	
+				    }
+
+
+        		}
         	echo json_encode($response);
         	exit;
         }
@@ -1098,39 +1098,39 @@
 
 			$response = array(  'image_error' => '',
 								'file_error' => '',
-        						'error_msg' => '',	
+        						'error_msg' => '',
         						'title_error' => '',
         						'post_id' => 0,
         						'auth_error' => '',
         						'success_msg' => ''	);
-        	
-        	
+
+
         	$is_valid = true;
-        	
+
         	if(!is_user_logged_in()){
-        		$is_valid = false;	
+        		$is_valid = false;
         		$response['error_msg'] = 'error';
-        		$response['auth_error'] = __('You must be logged in to submit a post! ','cosmotheme');	
+        		$response['auth_error'] = __('You must be logged in to submit a post! ','cosmotheme');
         	}
-            
+
             if(is_user_logged_in() && isset($_POST['post_id'])){
 				$post_edit = get_post($_POST['post_id']);
-				
+
 				if(get_current_user_id() != $post_edit->post_author){
-					$is_valid = false;	
+					$is_valid = false;
 					$response['error_msg'] = __('You are not the author of this post. ','cosmotheme');
 					$response['title_error'] = __('You are not the author of this post. ','cosmotheme');
 				}
 			}
-            
+
         	if(!isset($_POST['title']) || trim($_POST['title']) == ''){
-        		$is_valid = false;	
+        		$is_valid = false;
         		$response['error_msg'] = 'Title is required. ';
         		$response['title_error'] = __('Title is required. ','cosmotheme');
         	}
 
 			if(!isset($_POST['attachments'])){
-        		$is_valid = false;	
+        		$is_valid = false;
         		$response['error_msg'] = 'File is required. ';
         		$response['file_error'] = __('File is required. ','cosmotheme');
         	}
@@ -1143,19 +1143,19 @@
                             $post_categories[] = intval ( str_replace('category__', '', $key_var) );
                         }
                     }
-        			
+
         			$post_content = '';
         			if(isset($_POST['file_content'])){
         				$post_content = $_POST['file_content'];
         			}
-        			
-        			
+
+
                     if(isset($_POST['post_id'])){
-						$new_post = self::create_new_post($_POST['title'], $_POST['tags'], $post_categories, $post_content, $_POST['post_id']);  
+						$new_post = self::create_new_post($_POST['title'], $_POST['tags'], $post_categories, $post_content, $_POST['post_id']);
 					}else{
-						$new_post = self::create_new_post($_POST['title'],$_POST['tags'],$post_categories,$post_content);  
+						$new_post = self::create_new_post($_POST['title'],$_POST['tags'],$post_categories,$post_content);
 					}
-                    
+
 				    if(is_numeric($new_post))
 					  {
 						delete_post_thumbnail($new_post);
@@ -1172,30 +1172,30 @@
 						  }
 						$file_url_meta = array(	  "link"=>  "", "type" => 'link', 'link_id' => $_POST['attachments']);
 						meta::set_meta( $new_post , 'format' , $file_url_meta );
-						
+
 						if(isset($_POST['nsfw'])){
 							$settings_meta = array(	  "safe"=>  "yes");
 							meta::set_meta( $new_post , 'settings' , $settings_meta );
 						}else{
 							$settings_meta = array(	  "safe"=>  "yes");
 							delete_post_meta($new_post, 'settings', $settings_meta );
-						}	
-						
+						}
+
 						/*add source meta data*/
 						if(isset($_POST['source']) && trim($_POST['source']) != ''){
 						  $settings_meta = array(	  "post_source"=>  $_POST['source']);
-						  meta::set_meta( $new_post , 'source' , $settings_meta );	
+						  meta::set_meta( $new_post , 'source' , $settings_meta );
 						}else{
 							$settings_meta = array(	  "post_source"=>  $_POST['source']);
 							delete_post_meta($new_post, 'source', $settings_meta );
-						}	
-							
+						}
+
 						/*add file url meta data*/
 
 						if(isset($_POST['post_format']) && ($_POST['post_format'] == 'video' || $_POST['post_format'] == 'image' || $_POST['post_format'] == 'audio' || $_POST['post_format'] == 'link') ){
 							set_post_format( $new_post , $_POST['post_format']);
 						}
-						
+
 						if(isset($_POST['post_id'])){ /*if the post is edited */
 							$post_status = options::get_value( 'upload' , 'default_edit_status' );
 						}else{ /* if the post is just created */
@@ -1203,17 +1203,17 @@
 						}
 						if($post_status == 'publish'){
 							/*if post was publihed imediatelly then we will show the prmalink to the user*/
-								
+
 							$response['success_msg'] = sprintf(__('You can check your post %s here%s.','cosmotheme'),'<a href="'.get_permalink($new_post).'">','</a>');
-							
+
 						}else{
 							$response['success_msg'] = __('Success. Your post is awaiting moderation.','cosmotheme');
-						}	
+						}
 						$response['post_id'] = $new_post;
-				    }	
-				    
-	        		
-        		}	
+				    }
+
+
+        		}
         	echo json_encode($response);
         	exit;
 		}
@@ -1221,43 +1221,43 @@
 		static function add_audio_post(){
 			$response = array(  'image_error' => '',
 								'audio_error' => '',
-        						'error_msg' => '',	
+        						'error_msg' => '',
         						'title_error' => '',
         						'post_id' => 0,
         						'auth_error' => '',
         						'success_msg' => ''	);
-        	
-        	
+
+
         	$is_valid = true;
-        	
+
         	if(!is_user_logged_in()){
-        		$is_valid = false;	
+        		$is_valid = false;
         		$response['error_msg'] = 'error';
-        		$response['auth_error'] = __('You must be logged in to submit a post! ','cosmotheme');	
+        		$response['auth_error'] = __('You must be logged in to submit a post! ','cosmotheme');
         	}
-        	
+
             if(is_user_logged_in() && isset($_POST['post_id'])){
 				$post_edit = get_post($_POST['post_id']);
-				
+
 				if(get_current_user_id() != $post_edit->post_author){
-					$is_valid = false;	
+					$is_valid = false;
 					$response['error_msg'] = __('You are not the author of this post. ','cosmotheme');
 					$response['title_error'] = __('You are not the author of this post. ','cosmotheme');
 				}
 			}
-            
+
         	if(!isset($_POST['title']) || trim($_POST['title']) == ''){
-        		$is_valid = false;	
+        		$is_valid = false;
         		$response['error_msg'] = 'Title is required. ';
         		$response['title_error'] = __('Title is required. ','cosmotheme');
         	}
 
 			if(!isset($_POST['attachments'])){
-        		$is_valid = false;	
+        		$is_valid = false;
         		$response['error_msg'] = 'Audio File is required. ';
         		$response['audio_error'] = __('Audio File is required. ','cosmotheme');
-        	}	
-   	        	
+        	}
+
         		if($is_valid){
         			/*create post*/
         			$post_categories = array();
@@ -1266,18 +1266,18 @@
                             $post_categories[] = intval ( str_replace('category__', '', $key_var) );
                         }
                     }
-        			
+
         			$post_content = '';
         			if(isset($_POST['audio_content'])){
         				$post_content = $_POST['audio_content'];
         			}
 
 					if(isset($_POST['post_id'])){
-						$new_post = self::create_new_post($_POST['title'], $_POST['tags'], $post_categories, $post_content, $_POST['post_id']);  
+						$new_post = self::create_new_post($_POST['title'], $_POST['tags'], $post_categories, $post_content, $_POST['post_id']);
 					}else{
-						$new_post = self::create_new_post($_POST['title'],$_POST['tags'],$post_categories,$post_content);  
+						$new_post = self::create_new_post($_POST['title'],$_POST['tags'],$post_categories,$post_content);
 					}
-                    
+
 				    if(is_numeric($new_post))
 					  {
 						delete_post_thumbnail($new_post);
@@ -1301,21 +1301,21 @@
 						}else{
 							$settings_meta = array(	  "safe"=>  "yes");
 							delete_post_meta($new_post, 'settings', $settings_meta );
-						}	
-						
+						}
+
 						/*add source meta data*/
 						if(isset($_POST['source']) && trim($_POST['source']) != ''){
 						  $settings_meta = array(	  "post_source"=>  $_POST['source']);
-						  meta::set_meta( $new_post , 'source' , $settings_meta );	
+						  meta::set_meta( $new_post , 'source' , $settings_meta );
 						}else{
 							$settings_meta = array(	  "post_source"=>  $_POST['source']);
 							delete_post_meta($new_post, 'source', $settings_meta );
-						}	
-												
+						}
+
 						if(isset($_POST['post_format']) && ($_POST['post_format'] == 'video' || $_POST['post_format'] == 'image' || $_POST['post_format'] == 'audio' || $_POST['post_format'] == 'link') ){
 							set_post_format( $new_post , $_POST['post_format']);
 						}
-						
+
 						if(isset($_POST['post_id'])){ /*if the post is edited */
 							$post_status = options::get_value( 'upload' , 'default_edit_status' );
 						}else{ /* if the post is just created */
@@ -1323,51 +1323,51 @@
 						}
 						if($post_status == 'publish'){
 							/*if post was publihed imediatelly then we will show the prmalink to the user*/
-								
+
 							$response['success_msg'] = sprintf(__('You can check your post %s here%s.','cosmotheme'),'<a href="'.get_permalink($new_post).'">','</a>');
-							
+
 						}else{
 							$response['success_msg'] = __('Success. Your post is awaiting moderation.','cosmotheme');
-						}	
+						}
 						$response['post_id'] = $new_post;
-				    }	
-				    
-	        		
-        		}	
+				    }
+
+
+        		}
         	echo json_encode($response);
         	exit;
 		}
-        
+
         static function add_text_post(){
-        	$response = array(  'error_msg' => '',	
+        	$response = array(  'error_msg' => '',
         						'title_error' => '',
         						'post_id' => 0,
         						'auth_error' => '' );
-        	
+
         	$is_valid = true;
-        	
+
         	if(!is_user_logged_in()){
-        		$is_valid = false;	
+        		$is_valid = false;
         		$response['error_msg'] = 'error';
-        		$response['auth_error'] = __('You must be logged in to submit a post!','cosmotheme');	
+        		$response['auth_error'] = __('You must be logged in to submit a post!','cosmotheme');
         	}
-        	
+
             if(is_user_logged_in() && isset($_POST['post_id'])){
 				$post_edit = get_post($_POST['post_id']);
-				
+
 				if(get_current_user_id() != $post_edit->post_author){
-					$is_valid = false;	
+					$is_valid = false;
 					$response['error_msg'] = __('You are not the author of this post. ','cosmotheme');
 					$response['title_error'] = __('You are not the author of this post. ','cosmotheme');
 				}
 			}
-            
+
         	if(!isset($_POST['title']) || trim($_POST['title']) == ''){
-        		$is_valid = false;	
+        		$is_valid = false;
         		$response['error_msg'] = 'error';
         		$response['title_error'] = __('Title is required. ','cosmotheme');
         	}
-        	
+
         		if($is_valid){
 
 	        			/*create post*/
@@ -1378,100 +1378,100 @@
                                 $post_categories[] = intval ( str_replace('category__', '', $key_var) );
                             }
                         }
-	        			
+
 	        			$post_content = '';
 	        			if(isset($_POST['text_content'])){
 	        				$post_content = $_POST['text_content'];
 	        			}
-	        			
+
                         if(isset($_POST['post_id'])){
-                            $new_post = self::create_new_post($_POST['title'], $_POST['tags'], $post_categories, $post_content, $_POST['post_id']);  
+                            $new_post = self::create_new_post($_POST['title'], $_POST['tags'], $post_categories, $post_content, $_POST['post_id']);
                         }else{
-                            $new_post = self::create_new_post($_POST['title'],$_POST['tags'],$post_categories,$post_content);  
+                            $new_post = self::create_new_post($_POST['title'],$_POST['tags'],$post_categories,$post_content);
                         }
-                        
-					    if(is_numeric($new_post)){	
-						   
-							
+
+					    if(is_numeric($new_post)){
+
+
 							if(isset($_POST['nsfw'])){
 								$settings_meta = array(	  "safe"=>  "yes");
 								meta::set_meta( $new_post , 'settings' , $settings_meta );
 							}else{
 								$settings_meta = array(	  "safe"=>  "yes");
 								delete_post_meta($new_post, 'settings', $settings_meta );
-							}	
-							
+							}
+
 							/*add source meta data*/
 							if(isset($_POST['source']) && trim($_POST['source']) != ''){
 							  $settings_meta = array(	  "post_source"=>  $_POST['source']);
-							  meta::set_meta( $new_post , 'source' , $settings_meta );	
+							  meta::set_meta( $new_post , 'source' , $settings_meta );
 							}else{
 								$settings_meta = array(	  "post_source"=>  $_POST['source']);
 								delete_post_meta($new_post, 'source', $settings_meta );
-							}	
-						
+							}
+
 							if(isset($_POST['post_id'])){ /*if the post is edited */
 								$post_status = options::get_value( 'upload' , 'default_edit_status' );
 							}else{ /* if the post is just created */
 								$post_status = options::get_value( 'upload' , 'default_posts_status' );
-							} 
+							}
 							if($post_status == 'publish'){
 								/*if post was publihed imediatelly then we will show the prmalink to the user*/
-									
+
 								$response['success_msg'] = sprintf(__('You can check your post %s here%s.','cosmotheme'),'<a href="'.get_permalink($new_post).'">','</a>');
-								
+
 							}else{
 								$response['success_msg'] = __('Success. Your post is awaiting moderation','cosmotheme');
-							}	
+							}
 							$response['post_id'] = $new_post;
 					    }
-				
+
         		}
-        			
+
         	echo json_encode($response);
         	exit;
-        	
+
         }
-        
+
         static function add_video_post(){
         	$response = array(  'video_error' => '',
-        						'error_msg' => '',	
+        						'error_msg' => '',
         						'title_error' => '',
         						'post_id' => 0,
         						'auth_error' => '' );
-        	
-        	
+
+
         	$is_valid = true;
-        	
+
         	if(!is_user_logged_in()){
-        		$is_valid = false;	
+        		$is_valid = false;
         		$response['error_msg'] = 'error';
-        		$response['auth_error'] = __('You must be logged in to submit a post!','cosmotheme');	
+        		$response['auth_error'] = __('You must be logged in to submit a post!','cosmotheme');
         	}
-        	
+
             if(is_user_logged_in() && isset($_POST['post_id'])){
 				$post_edit = get_post($_POST['post_id']);
-				
+
 				if(get_current_user_id() != $post_edit->post_author){
-					$is_valid = false;	
+					$is_valid = false;
 					$response['error_msg'] = __('You are not the author of this post. ','cosmotheme');
 					$response['title_error'] = __('You are not the author of this post. ','cosmotheme');
 				}
 			}
-            
+
         	if(!isset($_POST['title']) || trim($_POST['title']) == ''){
-        		$is_valid = false;	
+        		$is_valid = false;
         		$response['error_msg'] = 'error';
         		$response['title_error'] = __('Title is required. ','cosmotheme');
         	}
-        	
+
 			if(!isset($_POST['attachments']) || !is_array($_POST['attachments']) || !isset($_POST['featured']) || !is_numeric($_POST['featured']))
 			{
-				$is_valid = false;	
+				$is_valid = false;
         		$response['error_msg'] = 'error';
         		$response['video_error'] = __('A video post must have a featured video.','cosmotheme');
 			}
-        	
+
         	if($is_valid)
 			  {
 	        	/*create post*/
@@ -1482,36 +1482,36 @@
                         $post_categories[] = intval ( str_replace('category__', '', $key_var) );
                     }
                 }
-	        			
+
 	        	$post_content = '';
 	        	if(isset($_POST['video_content'])){
 	        		$post_content = $_POST['video_content'];
 	        	}
-	        			
+
                 if(isset($_POST['post_id'])){
-				  $new_post = self::create_new_post($_POST['title'], $_POST['tags'], $post_categories, $post_content, $_POST['post_id']);  
+				  $new_post = self::create_new_post($_POST['title'], $_POST['tags'], $post_categories, $post_content, $_POST['post_id']);
                 }else{
-                  $new_post = self::create_new_post($_POST['title'],$_POST['tags'],$post_categories,$post_content);  
+                  $new_post = self::create_new_post($_POST['title'],$_POST['tags'],$post_categories,$post_content);
                 }
-                    
+
 				if(is_numeric($new_post))
-				  {	
+				  {
 					if(isset($_POST['nsfw'])){
 						$settings_meta = array(	  "safe"=>  "yes");
 						meta::set_meta( $new_post , 'settings' , $settings_meta );
 					}else{
 						$settings_meta = array(	  "safe"=>  "yes");
 						delete_post_meta($new_post, 'settings', $settings_meta );
-					}	
-							
+					}
+
 					/*add source meta data*/
 					if(isset($_POST['source']) && trim($_POST['source']) != ''){
 					  $settings_meta = array(	  "post_source"=>  $_POST['source']);
-					  meta::set_meta( $new_post , 'source' , $settings_meta );	
+					  meta::set_meta( $new_post , 'source' , $settings_meta );
 					}else{
 						$settings_meta = array(	  "post_source"=>  $_POST['source']);
 						delete_post_meta($new_post, 'source', $settings_meta );
-					}	
+					}
 
 					$featured_video_url = '';
 					foreach($_POST['attachments'] as $index=>$videoid)
@@ -1532,7 +1532,7 @@
 						 $attachment_post->post_parent=$new_post;
 						 wp_update_post($attachment_post);
 					  }
-				
+
 				  $video_format_meta=array("type"=>"video", "video_ids"=>$_POST['attachments'], "feat_id"=>$featured_video_id, "feat_url"=>$featured_video_url);
 				  if(isset($_POST['video_urls']))
 					$video_format_meta["video_urls"]=$_POST["video_urls"];
@@ -1541,8 +1541,8 @@
 							if(isset($_POST['post_format']) && ($_POST['post_format'] == 'video' || $_POST['post_format'] == 'image' || $_POST['post_format'] == 'audio') ){
 								set_post_format( $new_post , $_POST['post_format']);
 							}
-							
-							
+
+
 							if(isset($_POST['post_id'])){ /*if the post is edited */
 								$post_status = options::get_value( 'upload' , 'default_edit_status' );
 							}else{ /* if the post is just created */
@@ -1550,145 +1550,145 @@
 							}
 							if($post_status == 'publish'){
 								/*if post was publihed imediatelly then we will show the prmalink to the user*/
-									
+
 								$response['success_msg'] = sprintf(__('You can check your post %s here%s.','cosmotheme'),'<a href="'.get_permalink($new_post).'">','</a>');
-								
+
 							}else{
 								$response['success_msg'] = __('Success. Your post is awaiting moderation','cosmotheme');
-							}	
+							}
 							$response['post_id'] = $new_post;
 					    }
-				    
+
         			}else{
-        				$is_valid = false;	
+        				$is_valid = false;
 		        		$response['error_msg'] = 'error, could not create thumbnail for this video';
 		        		$response['video_error'] = __('Invalid video URL. ','cosmotheme');
         			}
-        			
+
         	echo json_encode($response);
         	exit;
         }
-        
-       
+
+
         static function get_embeded_video($video_id,$video_type,$autoplay = 0,$width = 620,$height = 450){
-        	
+
         	$embeded_video = '';
         	if($video_type == 'youtube'){
         		$embeded_video	= '<iframe width="'.$width.'" height="'.$height.'" src="http://www.youtube.com/embed/'.$video_id.'?wmode=transparent&autoplay='.$autoplay.'" wmode="opaque" frameborder="0" allowfullscreen></iframe>';
         	}elseif($video_type == 'vimeo'){
         		$embeded_video	= '<iframe src="http://player.vimeo.com/video/'.$video_id.'?title=0&amp;autoplay='.$autoplay.'&amp;byline=0&amp;portrait=0" width="'.$width.'" height="'.$height.'" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>';
         	}
-        	
+
         	return $embeded_video;
         }
-        
+
 		static function get_local_video($video_url, $width = 610, $height = 443, $autoplay = false ){
-			
-            $result = '';    
-			
+
+            $result = '';
+
             if($autoplay){
                 $auto_play = 'true';
             }else{
                 $auto_play = 'false';
             }
-            
-            $result = '<embed src="' . get_template_directory_uri() . '/flv/gddflvplayer.swf" 
-                flashvars="?&autoplay='.$auto_play.'&sound=70&buffer=2&vdo=' . $video_url . '" 
-                width="'.$width.'" 
-                height="'.$height.'" 
-                allowFullScreen="true" 
-                quality="best" 
-                wmode="transparent" 
-                allowScriptAccess="always"  
-                pluginspage="http://www.macromedia.com/go/getflashplayer"  
-                type="application/x-shockwave-flash"></embed>';
-            
 
-			return $result;	
+            $result = '<embed src="' . get_template_directory_uri() . '/flv/gddflvplayer.swf"
+                flashvars="?&autoplay='.$auto_play.'&sound=70&buffer=2&vdo=' . $video_url . '"
+                width="'.$width.'"
+                height="'.$height.'"
+                allowFullScreen="true"
+                quality="best"
+                wmode="transparent"
+                allowScriptAccess="always"
+                pluginspage="http://www.macromedia.com/go/getflashplayer"
+                type="application/x-shockwave-flash"></embed>';
+
+
+			return $result;
 		}
-		
+
         static function get_video_thumbnail($video_id,$video_type){
         	$thumbnail_url = '';
         	if($video_type == 'youtube'){
 				$thumbnail_url = 'http://i1.ytimg.com/vi/'.$video_id.'/hqdefault.jpg';
         	}elseif($video_type == 'vimeo'){
-        		
+
 				$hash = wp_remote_get("http://vimeo.com/api/v2/video/$video_id.php");
 				$hash = unserialize($hash['body']);
-				
-				$thumbnail_url = $hash[0]['thumbnail_large'];  
+
+				$thumbnail_url = $hash[0]['thumbnail_large'];
         	}
-        	
+
         	return $thumbnail_url;
         }
-        
+
     	static function get_youtube_video_id($url){
 	        /*
-	         *   @param  string  $url    URL to be parsed, eg:  
-	 		*  http://youtu.be/zc0s358b3Ys,  
+	         *   @param  string  $url    URL to be parsed, eg:
+	 		*  http://youtu.be/zc0s358b3Ys,
 	 		*  http://www.youtube.com/embed/zc0s358b3Ys
-	 		*  http://www.youtube.com/watch?v=zc0s358b3Ys 
-	 		*  
+	 		*  http://www.youtube.com/watch?v=zc0s358b3Ys
+	 		*
 	 		*  returns
-	 		*  */	
+	 		*  */
         	$id=0;
-        	
+
         	/*if there is a slash at the en we will remove it*/
         	$url = rtrim($url, " /");
         	if(strpos($url, 'youtu')){
-	        	$urls = parse_url($url); 
-	     
+	        	$urls = parse_url($url);
+
 			    /*expect url is http://youtu.be/abcd, where abcd is video iD*/
-			    if(isset($urls['host']) && $urls['host'] == 'youtu.be'){  
-			        $id = ltrim($urls['path'],'/'); 
-			    } 
-			    /*expect  url is http://www.youtube.com/embed/abcd*/ 
-			    else if(strpos($urls['path'],'embed') == 1){  
-			        $id = end(explode('/',$urls['path'])); 
-			    } 
-			     
+			    if(isset($urls['host']) && $urls['host'] == 'youtu.be'){
+			        $id = ltrim($urls['path'],'/');
+			    }
+			    /*expect  url is http://www.youtube.com/embed/abcd*/
+			    else if(strpos($urls['path'],'embed') == 1){
+			        $id = end(explode('/',$urls['path']));
+			    }
+
 			    /*expect url is http://www.youtube.com/watch?v=abcd */
-			    else if( isset($urls['query']) ){ 
-			        parse_str($urls['query']); 
-			        $id = $v; 
+			    else if( isset($urls['query']) ){
+			        parse_str($urls['query']);
+			        $id = $v;
 			    }else{
 					$id=0;
-				} 
-        	}	
-			
+				}
+        	}
+
 			return $id;
         }
-        
+
         static function  get_vimeo_video_id($url){
         	/*if there is a slash at the en we will remove it*/
         	$url = rtrim($url, " /");
         	$id = 0;
         	if(strpos($url, 'vimeo')){
-				$urls = parse_url($url); 
-				if(isset($urls['host']) && $urls['host'] == 'vimeo.com'){  
-					$id = ltrim($urls['path'],'/'); 
+				$urls = parse_url($url);
+				if(isset($urls['host']) && $urls['host'] == 'vimeo.com'){
+					$id = ltrim($urls['path'],'/');
 					if(!is_numeric($id) || $id < 0){
 						$id = 0;
 					}
 				}else{
 					$id = 0;
-				} 
-        	}	
+				}
+        	}
 			return $id;
 		}
-        
+
 
 	    static function isValidURL($url)
 		{
 			return preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $url);
 		}
 
-        
-		
+
+
 		static function create_new_post($post_title,$post_tags, $post_categories, $content = '', $post_id = 0 ){
         	$current_user = wp_get_current_user();
 
-        	
+
         	if($post_id == 0){
 				$post_status = options::get_value( 'upload' , 'default_posts_status' )	;
 				$post_args = array(
@@ -1700,13 +1700,13 @@
 					'tags_input' => $post_tags,
 					'post_category' => $post_categories
 		        );
-                
+
                 $new_post = wp_insert_post($post_args);
         	}else{
 				$post_status = options::get_value( 'upload' , 'default_edit_status' )	;
                 $updated_post = get_post($post_id);
         		$post_args = array(
-        			'ID' => $post_id,	
+        			'ID' => $post_id,
 		            'post_title' => $post_title,
 		            'post_content' => $content ,
 		            'post_status' => $post_status,
@@ -1716,18 +1716,18 @@
 					'tags_input' => $post_tags,
         			'post_category' => $post_categories
 		        );
-                
+
                 $new_post = wp_update_post($post_args);
-        	}    
-	
+        	}
+
 	        return $new_post;
         }
-        
+
         static function get_source($post_id){
-        	
+
         	$source = '';
   			$source_meta = meta::get_meta( $post_id , 'source' );
-  			
+
   			if(is_array($source_meta) && sizeof($source_meta) && isset($source_meta['post_source']) && trim($source_meta['post_source']) != ''){
   				if(self::isValidURL($source_meta['post_source'])){
   					$source_url = $source_meta['post_source'];
@@ -1741,19 +1741,19 @@
   			}else{
   				$source = '<div class="source no_source"><p>'.__('Unknown source','cosmotheme').'</p></div>';
   			}
-  			
-        
-        			
-  			return $source;      	
+
+
+
+  			return $source;
         }
 
 		static function get_attached_file($post_id){
-        	
+
         	$attached_file = '';
   			$attached_file_meta = meta::get_meta( $post_id , 'format' );
 
 
-  			
+
 			if(is_array($attached_file_meta) && sizeof($attached_file_meta) && isset($attached_file_meta['link_id']) && is_array($attached_file_meta['link_id'])){
 				foreach($attached_file_meta['link_id'] as $file_id)
 				  {
@@ -1761,7 +1761,7 @@
 					$file_name = '';
 					if(sizeof($attachment_url)){
 					  $file_name = $attachment_url[sizeof($attachment_url) - 1];
-					}	
+					}
 					$attached_file .= '<div class="attach">';
 					$attached_file .= '	<a href="'.wp_get_attachment_url($file_id).'">'.$file_name.'</a>';
 					$attached_file .= '</div>';
@@ -1773,17 +1773,17 @@
 					$file_name = '';
 					if(sizeof($attachment_url)){
 					  $file_name = $attachment_url[sizeof($attachment_url) - 1];
-					}	
+					}
 					$attached_file .= '<div class="attach">';
 					$attached_file .= '	<a href="'.wp_get_attachment_url($file_id).'">'.$file_name.'</a>';
 					$attached_file .= '</div>';
 			  }
-  					
-  			return $attached_file;      	
+
+  			return $attached_file;
         }
 
 		static function get_audio_file($post_id){
-        	
+
         	$attached_file = '';
   			$attached_file_meta = meta::get_meta( $post_id , 'format' );
 			if( is_array( $attached_file_meta ) && sizeof( $attached_file_meta ) && isset( $attached_file_meta[ 'audio' ] ) && is_array( $attached_file_meta[ 'audio' ] ) ) {
@@ -1791,55 +1791,55 @@
 				foreach($attached_file_meta['audio'] as $audio_id)
 				  {
 					$attached_file .= '[audio:'.wp_get_attachment_url($audio_id).']';
-				  }				
+				  }
 			}else if(is_array($attached_file_meta) && sizeof($attached_file_meta) && isset($attached_file_meta['audio']) && $attached_file_meta['audio'] != '' ){
 			  $attached_file .= '[audio:'.$attached_file_meta['audio'].']';
 			}
-  					
-  			return $attached_file;  	
+
+  			return $attached_file;
         }
-        
+
         static function play_video(){
-        	$result = '';	
-        	if(isset($_POST['video_id']) && isset($_POST['video_type']) && $_POST['video_type'] != 'self_hosted'){	
+        	$result = '';
+        	if(isset($_POST['video_id']) && isset($_POST['video_type']) && $_POST['video_type'] != 'self_hosted'){
         		$result = self::get_embeded_video($_POST['video_id'],$_POST['video_type'],1);
         	}else{
                 $video_url = urldecode($_POST['video_id']);
                 $result = self::get_local_video($video_url, 610, 443, true );
-            }	
-        	
+            }
+
         	echo $result;
         	exit;
         }
-		
+
 		static function list_tags($post_id){
             $tag_list = '';
             $tags = wp_get_post_terms($post_id, 'post_tag');
 
             if (!empty($tags)) {
                     $i = 1;
-                    foreach ($tags as $tag) { 
+                    foreach ($tags as $tag) {
                         if($i==1){
                             $tag_list .= $tag->name;
                         }else{
                             $tag_list .= ', '.$tag->name;
-                        }    
+                        }
                         $i++;
                     }
             }
-            
+
             return $tag_list;
 
             if(1==2){ the_tags(); }
         }
-		
+
 		static function remove_post(){
 			if(isset($_POST['post_id']) && is_numeric($_POST['post_id'])){
 				$post = get_post($_POST['post_id']);
 				if(get_current_user_id() == $post->post_author){ echo 'ee';
 					wp_delete_post($_POST['post_id']);
 				}
-			}  
+			}
 
 			exit;
 		}

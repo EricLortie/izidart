@@ -55,7 +55,7 @@ if(is_user_logged_in()){
     </div>
     <div class="cosmo-tabs submit large-12 small-12 columns" id="d39">
         <?php if(!isset($post_id)) { ?>
-            <ul class="tabs-nav">
+            <ul class="tabs-nav" style="display:none;">
                 <?php if( (options::logic( 'upload' , 'enb_image' ) )  ){	?>
                     <li class="first image tabs-selected"><a href="#pic_upload"><span><?php _e('Image','cosmotheme'); ?></span></a></li>
                 <?php } ?>
@@ -75,7 +75,7 @@ if(is_user_logged_in()){
         <?php } ?>
         <?php if( (options::logic( 'upload' , 'enb_image' ) && !isset($post_id) ) || ( isset($post_id) && $post_format == 'image')  ){	?>
             <div class="tabs-container" id="pic_upload">
-                <h3><?php if( isset($post_id) && $post_format == 'image'){ _e('Edit picture','cosmotheme'); }else{ _e('Add picture','cosmotheme'); } ?></h3>
+                <h3><?php if( isset($post_id) && $post_format == 'image'){ _e('EDIT ART','cosmotheme'); }else{ _e('ADD ART','cosmotheme'); } ?></h3>
                 <?php CosmoUploader::print_form("Attached images","image",true,true)?>
                 <form method="post" action="/post-item?phase=post" id="form_post_image" >
                     <div class="row">
@@ -102,7 +102,7 @@ if(is_user_logged_in()){
                         </div>
                         <div class="field large-12 small-12 columns">
                             <label class="select-cat">
-                                <h4><?php _e('Category','cosmotheme')?></h4>
+                                <h4><?php _e('Gallery','cosmotheme')?></h4>
                                 <?php
                                 if(isset($action_edit_image) && is_array($post_categories) && sizeof($post_categories) ){
                                     //$cat = get_category( $post_categories[0] );
@@ -120,11 +120,13 @@ if(is_user_logged_in()){
                                     );
                                 }
                                 $select_cats = wp_dropdown_categories( array('echo' => 0) );
-                                $select_cats = str_replace( 'id=', 'multiple="multiple" data-placeholder="Choose a category..." id=', $select_cats );
+                                $select_cats = str_replace( 'id=', 'multiple="multiple" data-placeholder="Choose a gallery..." id=', $select_cats );
                                 echo $select_cats;
                                 ?>
 
                             </label>
+                            <p class="info" id="text_source_input_info">If this is a part of a gallery please select the gallery here. This will override individual map markers for this post and place it with the gallery.</p>
+
                         </div>
                         <div class="field large-12 small-12 columns">
                             <label>
@@ -153,9 +155,12 @@ if(is_user_logged_in()){
                         <?php if(isset($post_id)) { ?>
                             <input type="hidden" value="<?php echo $post_id; ?>"  name="post_id">
                         <?php } ?>
+                        ;a;a;a
+                        <?php echo do_shortcode("[gmw_single_location map_width='100%' map_height='300px' elements='map' item_info_window='' zoom_level='15']"); ?>
+                        heeeey
                         <div class="field large-12 small-12 columns">
                             <p class="button blue">
-                                <input type="button" id="submit_img_btn"  onclick="add_image_post()" value="<?php if(isset($post_id)){ _e('Update post','cosmotheme'); }else{ _e('Submit post','cosmotheme'); } ?>"/>
+                                <input type="button" id="submit_img_btn"  onclick="add_image_post()" value="<?php if(isset($post_id)){ _e('Update post','cosmotheme'); }else{ _e('Submit art','cosmotheme'); } ?>"/>
                             </p>
                         </div>
                     </div>
@@ -204,6 +209,8 @@ if(is_user_logged_in()){
                                 ?>
 
                             </label>
+                            <p class="info" id="text_source_input_info">If this is a part of a gallery please select the gallery here. This will override individual map markers for this post and place it with the gallery.</p>
+
                         </div>
                         <div class="field large-12 small-12 columns">
                             <h4><?php _e('Text content','cosmotheme')?></h4>
@@ -279,7 +286,7 @@ if(is_user_logged_in()){
                         </div>
                         <div class="field large-12 small-12 columns">
                             <label>
-                                <h4><?php _e('Category','cosmotheme')?></h4>
+                                <h4><?php _e('Gallery','cosmotheme')?></h4>
                                 <?php
 
                                 if(isset($action_edit_text) && is_array($post_categories) && sizeof($post_categories) ){
@@ -303,6 +310,8 @@ if(is_user_logged_in()){
                                 ?>
 
                             </label>
+                            <p class="info" id="text_source_input_info">If this is a part of a gallery please select the gallery here. This will override individual map markers for this post and place it with the gallery.</p>
+
                         </div>
                         <div class="field large-12 small-12 columns">
                             <label>
@@ -398,6 +407,8 @@ if(is_user_logged_in()){
                                 ?>
 
                             </label>
+                            <p class="info" id="text_source_input_info">If this is a part of a gallery please select the gallery here. This will override individual map markers for this post and place it with the gallery.</p>
+
                         </div>
                         <div class="field large-12 small-12 columns">
                             <label>
@@ -493,6 +504,8 @@ if(is_user_logged_in()){
                                 ?>
 
                             </label>
+                            <p class="info" id="text_source_input_info">If this is a part of a gallery please select the gallery here. This will override individual map markers for this post and place it with the gallery.</p>
+
                         </div>
                         <div class="field large-12 small-12 columns">
                             <label>

@@ -53,7 +53,10 @@
                                                 }else{
                                         ?>
                                                     <div class="love">
-                                                        <div <?php  if( like::can_vote( $post -> ID ) ){  echo "onclick=\"javascript:act.like(".$post -> ID.", '#like-".$post -> ID."' , '');\""; } ?> class="set-like voteaction <?php if( like::is_voted( $post -> ID ) ){ echo 'voted '; } if( !like::can_vote( $post -> ID ) ){ echo "simplemodal-login"; }?>" id="voteaction"><em><strong  id="like-<?php echo $post -> ID; ?>"  ><?php  echo count( meta::get_meta( $post ->ID , 'like') ); ?></strong></em></div>
+                                                      <div <?php  if( like::can_vote( $post -> ID ) ){  echo "onclick=\"javascript:act.like(".$post -> ID.", '#like-".$post -> ID."' , '');\""; } ?> class="set-like voteaction <?php if( like::is_voted( $post -> ID ) ){ echo 'voted '; } if( !like::can_vote( $post -> ID ) ){ echo "simplemodal-login"; }?>" id="voteaction"><em><strong  id="like-<?php echo $post -> ID; ?>"  ><?php  echo count( meta::get_meta( $post ->ID , 'like') ); ?></strong></em></div>
+                                                    </div>
+                                                    <div class="love btn-izidart">
+                                                      <div <?php  if( art::can_vote( $post -> ID ) ){  echo "onclick=\"javascript:act.art(".$post -> ID.", '#art-".$post -> ID."' , '');\""; } ?> class="set-art voteaction <?php if( art::is_voted( $post -> ID ) ){ echo 'IZART '; } if( !art::can_vote( $post -> ID ) ){ echo "simplemodal-login"; }?>" id="voteaction"><em><strong  id="like-<?php echo $post -> ID; ?>"  ><?php  echo count( meta::get_meta( $post ->ID , 'izart') ); ?></strong></em></div>
                                                     </div>
                                         <?php
                                                 }
@@ -175,7 +178,7 @@
 
                                                             if( !empty( $video_type ) ){
                                                                 echo post::get_embeded_video( $video_id , $video_type );
-                                                            }elseif(isset( $format['video'] ) && !empty( $format['video'] )  ){ 
+                                                            }elseif(isset( $format['video'] ) && !empty( $format['video'] )  ){
                                                                 echo post::get_local_video( $format['video']  );
                                                             }
                                                           }
@@ -241,16 +244,16 @@
                                                                   {
                                                                     $vertical_align_style="";
                                                                   }
-            
+
                                                                 echo "<img alt=\"\" src=\"$url\" width=\"$width\" height=\"$height\" $vertical_align_style>";
                                                                 echo "</a>";
                                                                 echo "</div>";
-                                                              } 
+                                                              }
                                                             echo "</div>";
                                                           }
                                                       }
                                                       the_content();
-                                                     
+
                                                 }else{
                                                     if( !meta::logic( $post , 'settings' , 'safe' ) ){
                                                             if( get_post_format( $post -> ID ) == 'video' ){
@@ -279,7 +282,7 @@
                                                             <div class="featimg">
                                                                 <?php if( strlen( $classes ) ){ ?>
                                                                 <div class="img">
-                                                                <?php } ?>  
+                                                                <?php } ?>
                                                                 <?php
                                                                     if( strlen( $classes ) ){
                                                                         echo image::mis($post->ID, $template, $size, 'safe image', 'nsfw');
@@ -287,9 +290,9 @@
                                                                         echo post::get_local_video( urlencode($format['video']  ));
                                                                     }
                                                                 ?>
-                                                                <?php if( strlen( $classes ) ){ ?>  
+                                                                <?php if( strlen( $classes ) ){ ?>
                                                               </div>
-                                                            <?php } ?>      
+                                                            <?php } ?>
                                                             </div>
                                                           </header>
                                                     <?php }
@@ -356,18 +359,18 @@
                                                                   {
                                                                     $vertical_align_style="";
                                                                   }
-            
+
                                                                 echo "<img alt=\"\" src=\"$url\" width=\"$width\" height=\"$height\" $vertical_align_style>";
                                                                 echo "</a>";
                                                                 echo "</div>";
-                                                              } 
+                                                              }
                                                             echo "</div>";
                                                           }
                                                       }
                                                         the_content();
-                                                        
+
                                                     }elseif(!has_post_thumbnail ( $post -> ID ) || get_post_format( $post -> ID ) == 'video'){
-                                            ?>  
+                                            ?>
                                                         <a class="simplemodal-nsfw" href="<?php echo wp_login_url( ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/nsfw.png" class="safe image" alt="<?php echo $caption; ?>" /></a>
                                             <?php
                                                     }
@@ -380,20 +383,20 @@
                                         <?php
                                             if( get_post_format( $post -> ID ) == 'link' ){
                                                 echo post::get_attached_file($post -> ID);
-                                            }  
+                                            }
                                         ?>
                                         <?php
                                             if( get_post_format( $post -> ID ) == 'audio' ){
-                                                $audio = new AudioPlayer(); 
+                                                $audio = new AudioPlayer();
                                                 echo $audio->processContent(post::get_audio_file($post -> ID));
-                                            }  
-                                        ?>  
+                                            }
+                                        ?>
                                         <?php get_template_part( 'social-sharing' ); ?>
-                                        <?php 
+                                        <?php
                                         if(options::logic( 'blog_post' , 'show_source' ) && meta::logic( $post , 'settings' , 'meta' )){
                                             echo post::get_source($post -> ID);
-                                        }  
-                                        ?>  
+                                        }
+                                        ?>
                                         <?php
                                             if( strlen( options::get_value( 'advertisement' , 'content' ) ) > 0 ){
                                         ?>
@@ -404,6 +407,12 @@
                                             }
                                         ?>
                                     </footer>
+
+                                    <?php
+                                      echo "lalalal";
+                                      echo print_r(exif_read_data(get_attached_file(get_post_thumbnail_id( $post -> ID )), 0, true));
+                                      echo "helloo";
+                                     ?>
                                 </article>
                                 <p class="delimiter blank">&nbsp;</p>
                                 <?php
